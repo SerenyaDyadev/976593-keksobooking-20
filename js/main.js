@@ -37,10 +37,10 @@ var getSource = function (array) {
   var qty = getRundomArrayElement(array);
   var index = array.indexOf(qty);
   if (index === -1) {
-    getSource();
+    getSource(array);
   } else {
     array.splice(index, 1);
-    var src = 'img/avatars/user' + '/0' + qty + '.png';
+    var src = 'img/avatars/user' + '0' + qty + '.png';
   }
 
   return src;
@@ -103,10 +103,25 @@ var getObjectsToArray = function (numberObjects) {
 
 var arrayData = getObjectsToArray(NUMBER_OBJECTS);
 
-// console.log(arrayData);
-
 var mapBooking = document.querySelector('.map');
 mapBooking.classList.remove('map--faded');
 
-var mapPinTemplate = document.querySelector('#pin');
-console.log(similarMapPin);
+var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+
+var fragmentMapPin = document.createDocumentFragment();
+
+var renderPin = function (wizard) {
+  var pinElement = mapPinTemplate.cloneNode(true);
+  pinElement.querySelector('img').src = wizard.author.avatar;
+  pinElement.querySelector('img').alt = wizard.offer.title;
+  pinElement.style.left = wizard.location.x + 'px';
+  pinElement.style.top = wizard.location.y + 'px';
+
+  return pinElement;
+};
+
+for (var i = 0; i < arrayData.length; i++) {
+  fragmentMapPin.appendChild(renderPin(arrayData[i]));
+}
+
+mapBooking.appendChild(fragmentMapPin);
