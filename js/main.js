@@ -40,7 +40,7 @@ var getSource = function (array) {
     getSource();
   } else {
     array.splice(index, 1);
-    var src = 'img/avatars/user' + '/0' + qty + '.png';
+    var src = 'img/avatars/user' + '0' + qty + '.png';
   }
 
   return src;
@@ -101,6 +101,8 @@ var getObjectsToArray = function (numberObjects) {
   return array;
 };
 
+// var testObject = getObject();
+// console.log(testObject);
 var arrayData = getObjectsToArray(NUMBER_OBJECTS);
 
 // console.log(arrayData);
@@ -108,5 +110,23 @@ var arrayData = getObjectsToArray(NUMBER_OBJECTS);
 var mapBooking = document.querySelector('.map');
 mapBooking.classList.remove('map--faded');
 
-var mapPinTemplate = document.querySelector('#pin');
-console.log(similarMapPin);
+var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+// console.log(mapPinTemplate);
+
+var fragmentMapPin = document.createDocumentFragment();
+
+var renderPin = function (wizard) {
+  var pinElement = mapPinTemplate.cloneNode(true);
+  pinElement.querySelector('img').src = wizard.author.avatar;
+  pinElement.querySelector('img').alt = wizard.offer.title;
+  pinElement.style.left = wizard.location.x + 'px';
+  pinElement.style.top = wizard.location.y + 'px';
+
+  return pinElement;
+};
+
+for (var i = 0; i < arrayData.length; i++) {
+  fragmentMapPin.appendChild(renderPin(arrayData[i]));
+}
+
+mapBooking.appendChild(fragmentMapPin);
