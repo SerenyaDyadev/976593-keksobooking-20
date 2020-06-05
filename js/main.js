@@ -1,7 +1,8 @@
 'use strict';
 
-var RUNDOM_QUANTITY = 5;
-//для количества людей и комнат
+var NUMBER_GUESTS = 2;
+var NUMBER_ROOMS = 3;
+// для количества людей и комнат
 
 var X_RANGE_MIN = 0;
 var X_RANGE_MAX = 1200;
@@ -18,45 +19,48 @@ var SOURCES = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.
 
 var NUMBER_OBJECTS = 8;
 
+// если не для гостей, то надо дать возможность выпадать нулю - 0 ?
 var getRundomQuantity = function (number) {
-  var qrt = Math.round(Math.random() * number)
+  var qrt = Math.round(Math.random() * number);
   if (qrt === 0) {
-    qrt = 1
+    qrt = 1;
   }
 
   return qrt;
-}
+};
 
 var getRundomArrayElement = function (array) {
   return array[Math.floor(Math.random() * array.length)];
-}
+};
 
-var getAvatarSource = function (array) {
+var getSource = function (array) {
   var qty = getRundomArrayElement(array);
   var index = array.indexOf(qty);
-  if (index == -1) {
-    getAvatarSource(array);
+  if (index === -1) {
+    getSource();
   } else {
     array.splice(index, 1);
-
-    return 'img/avatars/user' + '/0' + qty + '.png';
+    var src = 'img/avatars/user' + '/0' + qty + '.png';
   }
-}
+
+  return src;
+};
 
 var getRandomString = function (array) {
   var stringLength = Math.round(Math.random() * array.length);
+  var string;
   if (stringLength === 0) {
-    var string = array[0];
+    string = array[0];
   } else {
-    var string = array.slice(0, stringLength).join(' ');
-  };
+    string = array.slice(0, stringLength).join(' ');
+  }
 
   return string;
-}
+};
 
 var getRundomLocation = function (min, max) {
   return Math.floor(Math.random() * (max - min));
-}
+};
 
 var getObject = function () {
   var x = getRundomLocation(X_RANGE_MIN, X_RANGE_MAX);
@@ -64,15 +68,15 @@ var getObject = function () {
 
   var newObject = {
     author: {
-      avatar: getAvatarSource(NUMBERS),
+      avatar: getSource(NUMBERS),
     },
     offer: {
       title: 'Заголовок',
       address: x + ', ' + y,
       price: '100 руб.',
       type: getRundomArrayElement(PLACES),
-      rooms: getRundomQuantity(RUNDOM_QUANTITY),
-      guests: getRundomQuantity(RUNDOM_QUANTITY),
+      rooms: getRundomQuantity(NUMBER_ROOMS),
+      guests: getRundomQuantity(NUMBER_GUESTS),
       checkin: getRundomArrayElement(TIMES),
       checkout: getRundomArrayElement(TIMES),
       features: getRandomString(WORDS),
@@ -83,10 +87,10 @@ var getObject = function () {
       x: x,
       y: y
     }
-  }
+  };
 
   return newObject;
-}
+};
 
 var getObjectsToArray = function (numberObjects) {
   var array = [];
@@ -95,9 +99,14 @@ var getObjectsToArray = function (numberObjects) {
   }
 
   return array;
-}
+};
 
-var arrayTask = getObjectsToArray(NUMBER_OBJECTS);
+var arrayData = getObjectsToArray(NUMBER_OBJECTS);
 
-console.log(arrayTask);
-document.querySelector('.map').classList.remove('map--faded');
+// console.log(arrayData);
+
+var mapBooking = document.querySelector('.map');
+mapBooking.classList.remove('map--faded');
+
+var mapPinTemplate = document.querySelector('#pin');
+console.log(similarMapPin);
