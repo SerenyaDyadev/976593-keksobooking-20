@@ -37,7 +37,7 @@ var getSource = function (array) {
   var qty = getRundomArrayElement(array);
   var index = array.indexOf(qty);
   if (index === -1) {
-    getSource(array);
+    getSource();
   } else {
     array.splice(index, 1);
     var src = 'img/avatars/user' + '0' + qty + '.png';
