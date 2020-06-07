@@ -21,16 +21,8 @@ var getRandomElement = function (array) {
   return array[Math.floor(Math.random() * array.length)];
 };
 
-var getRandomStrings = function (array) {
-  var length = Math.round(Math.random() * array.length);
-  var arr;
-  if (length === 0) {
-    arr = array[0];
-  } else {
-    arr = array.slice(0, length);
-  }
-
-  return arr;
+var getRandomArray = function (array) {
+  return array.slice(0, Math.round(Math.random() * array.length));
 };
 
 var getRandomQuantity = function (min, max) {
@@ -58,9 +50,9 @@ var getObject = function (number) {
       guests: getRandomQuantity(MIN_GUEST_NUMBER, MAX_GUEST_NUMBER),
       checkin: getRandomElement(IN_OUT_TIMES),
       checkout: getRandomElement(IN_OUT_TIMES),
-      features: getRandomStrings(OBJECT_FEATURES),
+      features: getRandomArray(OBJECT_FEATURES),
       description: 'Описание',
-      photos: getRandomStrings(OBJECT_PHOTOS),
+      photos: getRandomArray(OBJECT_PHOTOS),
     },
     location: {
       x: x,
