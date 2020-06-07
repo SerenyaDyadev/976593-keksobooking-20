@@ -71,16 +71,16 @@ var getObject = function (number) {
   return newObject;
 };
 
-var getObjectsToArray = function (numberObjects) {
+var getArrayObjects = function (number) {
   var array = [];
-  for (var i = 0; i < numberObjects; i++) {
+  for (var i = 0; i < number; i++) {
     array.push(getObject(i + 1));
   }
 
   return array;
 };
 
-var arrayData = getObjectsToArray(NUMBER_OBJECTS);
+var arrayData = getArrayObjects(NUMBER_OBJECTS);
 // Вставка Объектов пинов на карту //
 
 var mapBooking = document.querySelector('.map');
