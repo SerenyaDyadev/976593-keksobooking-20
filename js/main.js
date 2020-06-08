@@ -5,6 +5,8 @@ var MAX_ROOM_NUMBER = 4;
 var MIN_GUEST_NUMBER = 1;
 var MAX_GUEST_NUMBER = 5;
 
+var WIDTH_PIN = 50;
+var HEIGHT_PIN = 70;
 var X_RANGE_MIN = 0;
 var X_RANGE_MAX = 1200;
 var Y_RANGE_MIN = 130;
@@ -41,8 +43,8 @@ var getRandomQuantity = function (min, max) {
 };
 
 var getObject = function (number) {
-  var x = getRandomQuantity(X_RANGE_MIN, X_RANGE_MAX);
-  var y = getRandomQuantity(Y_RANGE_MIN, Y_RANGE_MAX);
+  var x = getRandomQuantity(X_RANGE_MIN, X_RANGE_MAX) - WIDTH_PIN / 2;
+  var y = getRandomQuantity(Y_RANGE_MIN, Y_RANGE_MAX) - HEIGHT_PIN / 2;
 
   var newObject = {
     author: {
