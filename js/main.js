@@ -44,7 +44,7 @@ var getRandomQuantity = function (min, max) {
 
 var getObject = function (number) {
   var x = getRandomQuantity(X_RANGE_MIN, X_RANGE_MAX) - WIDTH_PIN / 2;
-  var y = getRandomQuantity(Y_RANGE_MIN, Y_RANGE_MAX) - HEIGHT_PIN / 2;
+  var y = getRandomQuantity(Y_RANGE_MIN, Y_RANGE_MAX) - HEIGHT_PIN;
 
   var newObject = {
     author: {
