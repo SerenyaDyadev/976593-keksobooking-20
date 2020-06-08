@@ -25,12 +25,19 @@ var getRandomArray = function (array) {
   return array.slice(0, Math.round(Math.random() * array.length));
 };
 
-var getRandomQuantity = function (min, max) {
-  if (!min) {
-    min = 0;
+var makeRandomSortArray = function (array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
   }
 
-  return Math.round(min + Math.random() * (max - min));
+  return array;
+};
+
+var getRandomQuantity = function (min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 var getObject = function (number) {
@@ -52,7 +59,7 @@ var getObject = function (number) {
       checkout: getRandomElement(IN_OUT_TIMES),
       features: getRandomArray(OBJECT_FEATURES),
       description: 'Описание',
-      photos: getRandomArray(OBJECT_PHOTOS),
+      photos: getRandomArray(makeRandomSortArray(OBJECT_PHOTOS)),
     },
     location: {
       x: x,
