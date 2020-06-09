@@ -124,7 +124,7 @@ var getPopupType = function (type) {
 var fragmentPhoto = document.createDocumentFragment();
 
 var getPhotoSrc = function (photos) {
-  for (var i = 0; i < photos.length; i++) {
+  for (i = 0; i < photos.length; i++) {
     var photoElement = cardTemplate.querySelector('.popup__photo').cloneNode(true);
     photoElement.src = photos[i];
     fragmentPhoto.appendChild(photoElement);
@@ -138,7 +138,7 @@ var fragmentWithFeatures = document.createDocumentFragment();
 var getFeatures = function (features) {
   var listFeauters = cardTemplate.querySelector('.popup__features').cloneNode(false);
 
-  for (var i = 0; i < features.length; i++) {
+  for (i = 0; i < features.length; i++) {
     var listElement = document.createElement('li');
     listElement.className = 'popup__feature popup__feature--' + features[i];
     listFeauters.appendChild(listElement);
