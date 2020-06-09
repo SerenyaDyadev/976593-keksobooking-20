@@ -137,17 +137,15 @@ var fragmentWithFeatures = document.createDocumentFragment();
 
 var getFeatures = function (features) {
   var listFeauters = cardTemplate.querySelector('.popup__features').cloneNode(false);
-  var feauterElements = cardTemplate.querySelectorAll('.popup__feature');
 
   for (var i = 0; i < features.length; i++) {
-    for (var j = 0; j < feauterElements.length; j++) {
-      if (feauterElements[j].className.indexOf(features[i]) !== -1) {
-        listFeauters.appendChild(feauterElements[j]);
-      }
-    }
+    var listElement = document.createElement('li');
+    listElement.className = 'popup__feature popup__feature--' + features[i];
+    listFeauters.appendChild(listElement);
   }
 
   fragmentWithFeatures.appendChild(listFeauters);
+
   return fragmentWithFeatures;
 };
 
