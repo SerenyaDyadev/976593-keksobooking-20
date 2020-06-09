@@ -105,75 +105,68 @@ for (var i = 0; i < arrayData.length; i++) {
 
 mapBooking.appendChild(fragmentMapPin);
 
-/*
-
 // Вставка карточек с описанием для пинов //
 
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 
 var filtersContainer = document.querySelector('.map__filters-container');
-// console.log(arrayData[0].offer.features);
 
-var fragmentFeature = document.createDocumentFragment();
-var popupFeatures = cardTemplate.querySelector('.popup__features');
-var popupFeatureWifi = popupFeatures.querySelector('popup__feature--wifi');
-var popupFeatureDishwasher = popupFeatures.querySelector('popup__feature--dishwasher');
-var popupFeatureParking = popupFeatures.querySelector('popup__feature--parking');
-var popupFeatureWasher = popupFeatures.querySelector('popup__feature--washer');
-var popupFeatureElevator = popupFeatures.querySelector('popup__feature--elevator');
-var popupFeatureConditioner = popupFeatures.querySelector('popup__feature--conditioner');
-
-console.log(popupFeatures.length);
-
-// fragmentMapPin.appendChild(<li class= "popup__feature popup__feature--wifi"></li>);
-var getPopupFeatures = function (arr) {
-
-  popupFeatures.appendChild(popupFeatureWifi);
-  if (arr.length > 1) {
-  // for (var i = 1; i < arr.length; i ++) {
-  //   // if [arr]
-    console.log(arr[1]);
-  // // console.log(arr.length);
-  }
-
-  return
-};
-
-getPopupFeatures(arrayData[0].offer.features);
-  // console.log(getPopupFeatures(arrayData[0].offer.features));
-
-var getPopupType = function (number) {
-  var type = '';
-  if (number === 'flat') {
+var getPopupType = function (type) {
+  if (type === 'flat') {
     type = 'Квартира';
-  } else if (number === 'bungalo') {
+  } else if (type === 'bungalo') {
     type = 'Бунгало';
-  } else if (number === 'house') {
+  } else if (type === 'house') {
     type = 'Дом';
-  } else if (number === 'palace') {
+  } else if (type === 'palace') {
     type = 'Дворец';
-  }
-  /*
-  else {
-    type = 'Во дворце дом квартирный, а рядом бунгало';
   }
 
   return type;
 };
 
+var fragmentPhoto = document.createDocumentFragment();
+
+var getPhotoSrc = function (photos) {
+  var photoElement = cardElement.querySelector('.popup__photo').cloneNode(true);
+  for (var i = 0; i < photos.length; i++) {
+    photoElement = cardElement.querySelector('.popup__photo').cloneNode(true);
+    photoElement.src = photos[i];
+    fragmentPhoto.appendChild(photoElement);
+  }
+
+  return fragmentPhoto;
+};
+
+var fragmentWithFeatures = document.createDocumentFragment();
+
+var getFeatures = function (features) {
+  var listFeauters = cardTemplate.querySelector('.popup__features').cloneNode(false);
+  var feautersElement = cardTemplate.querySelectorAll('.popup__feature');
+
+  for (var i = 0; i < features.length; i++) {
+    for (var j = 0; j < feautersElement.length; j++) {
+      if (feautersElement[j].className.indexOf(features[i]) !== -1) {
+        listFeauters.appendChild(feautersElement[j]);
+      }
+    }
+  }
+
+  fragmentWithFeatures.appendChild(listFeauters);
+  return fragmentWithFeatures;
+};
+
 var cardElement = cardTemplate.cloneNode(true);
+cardElement.querySelector('.popup__avatar').src = arrayData[0].author.avatar;
 cardElement.querySelector('.popup__title').textContent = arrayData[0].offer.title;
 cardElement.querySelector('.popup__text--address').textContent = arrayData[0].offer.address;
 cardElement.querySelector('.popup__text--price').textContent = arrayData[0].offer.price + '₽/ночь';
 cardElement.querySelector('.popup__type').textContent = getPopupType(arrayData[0].offer.type);
 cardElement.querySelector('.popup__text--capacity').textContent = arrayData[0].offer.rooms + ' комнаты для ' + arrayData[0].offer.guests + ' гостей';
 cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + arrayData[0].offer.checkin + ', выезд до  ' + arrayData[0].offer.checkout;
-// cardElement.querySelector('.popup__features').appendChild.getPopupFeatures(arrayData[0].offer.features);
-// console.log(cardElement.querySelector('.popup__features'));
-// popupFeatures.appendChild(fragmentFeature);
-
-// console.log(cardElement);
+cardElement.removeChild(cardElement.querySelector('.popup__features'));
+cardElement.insertBefore(getFeatures(arrayData[0].offer.features), cardElement.querySelector('.popup__description'));
+cardElement.querySelector('.popup__description').textContent = arrayData[0].offer.description;
+cardElement.querySelector('.popup__photos').replaceChild(getPhotoSrc(arrayData[0].offer.photos), cardElement.querySelector('.popup__photo'));
 
 mapBooking.insertBefore(cardElement, filtersContainer);
-
-*/
