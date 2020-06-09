@@ -117,10 +117,6 @@ var accommodationTypes = {
   palace: 'Дворец'
 };
 
-var getPopupType = function (type) {
-  return accommodationTypes[type];
-};
-
 var fragmentPhoto = document.createDocumentFragment();
 
 var getPhotoSrc = function (photos) {
@@ -155,7 +151,7 @@ var getCard = function (data) {
   cardElement.querySelector('.popup__title').textContent = data.offer.title;
   cardElement.querySelector('.popup__text--address').textContent = data.offer.address;
   cardElement.querySelector('.popup__text--price').textContent = data.offer.price + '₽/ночь';
-  cardElement.querySelector('.popup__type').textContent = getPopupType(data.offer.type);
+  cardElement.querySelector('.popup__type').textContent = accommodationTypes[data.offer.type];
   cardElement.querySelector('.popup__text--capacity').textContent = data.offer.rooms + ' комнаты для ' + data.offer.guests + ' гостей';
   cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + data.offer.checkin + ', выезд до  ' + data.offer.checkout;
   cardElement.removeChild(cardElement.querySelector('.popup__features'));
