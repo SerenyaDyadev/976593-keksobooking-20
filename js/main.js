@@ -191,10 +191,16 @@ var mapFilters = document.querySelector('.map__filters');
 addDisabledAttribute(addForm.querySelectorAll('select, fieldset'));
 addDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'));
 
-
-mapPinMain.addEventListener('mousedown', function () {
+var activeMode = function () {
   mapBooking.classList.remove('map--faded');
   addForm.classList.remove('ad-form--disabled');
   removeDisabledAttribute(addForm.querySelectorAll('select, fieldset'));
   removeDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'));
+};
+
+mapPinMain.addEventListener('mousedown', function (evt) {
+
+  if (evt.button === 0) {
+    activeMode();
+  }
 });
