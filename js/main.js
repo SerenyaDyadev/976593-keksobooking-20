@@ -204,3 +204,10 @@ mapPinMain.addEventListener('mousedown', function (evt) {
     activeMode();
   }
 });
+
+mapPinMain.addEventListener('keydown', function (evt) {
+
+  if (evt.key === 'Enter') {
+    activeMode();
+  }
+});
