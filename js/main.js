@@ -217,12 +217,37 @@ var mapCircleCenterX = +(mapPinMain.style.left).split('px')[0] + MAP_PIN_WIDTH /
 var mapCircleCenterY = +(mapPinMain.style.top).split('px')[0] + MAP_PIN_WIDTH / 2;
 var mapPinLocationX = mapCircleCenterX;
 var mapPinLocationY = +(mapPinMain.style.top).split('px')[0] + MAP_PIN_HEIGHT;
-// console.log(mapPinLocationX);
-// console.log(mapPinLocationY);
 
 var inputAddress = addForm.querySelector('#address');
 inputAddress.value = mapCircleCenterX + ', ' + mapCircleCenterY;
-// console.log(inputAddress.value);
+
+
+var capacityRooms = addForm.room_number;
+var capacityGuests = addForm.capacity;
+
+
+var relationRoomsGuest = function () {
+  for (var i = 0; i < capacityGuests.length; i++) {
+    capacityGuests.options[i].disabled = true;
+  }
+
+  if (capacityRooms.selectedIndex === 0) {
+    capacityGuests.options[2].disabled = false;
+    capacityGuests.options[2].selected = true;
+  } else if (capacityRooms.selectedIndex === 1) {
+    capacityGuests.options[1].disabled = false;
+    capacityGuests.options[2].disabled = false;
+    capacityGuests.options[1].selected = true;
+  } else if (capacityRooms.selectedIndex === 2) {
+    capacityGuests.options[0].disabled = false;
+    capacityGuests.options[1].disabled = false;
+    capacityGuests.options[2].disabled = false;
+    capacityGuests.options[0].selected = true;
+  } else if (capacityRooms.selectedIndex === 3) {
+    capacityGuests.options[3].disabled = false;
+    capacityGuests.options[3].selected = true;
+  }
+};
 
 
 addDisabledAttribute(addForm.querySelectorAll('select, fieldset'));
@@ -234,6 +259,7 @@ var activeMode = function () {
   removeDisabledAttribute(addForm.querySelectorAll('select, fieldset'));
   removeDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'));
   inputAddress.value = mapPinLocationX + ', ' + mapPinLocationY;
+  relationRoomsGuest();
 };
 
 mapPinMain.addEventListener('mousedown', function (evt) {
@@ -249,3 +275,10 @@ mapPinMain.addEventListener('keydown', function (evt) {
     activeMode();
   }
 });
+
+capacityRooms.addEventListener('change', function () {
+  relationRoomsGuest();
+});
+
+// console.log(capacityRooms);
+// console.log(capacityGuests);
