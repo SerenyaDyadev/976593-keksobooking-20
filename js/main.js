@@ -171,6 +171,30 @@ mapBooking.insertBefore(getCard(arrayData[0]), filtersContainer);
 
 // Единственное доступное действие в неактивном состоянии — перемещение метки .map__pin--main, являющейся контролом указания адреса объявления. Первое взаимодействие с меткой (mousedown) переводит страницу в активное состояние.
 
+/*
+ody::before {
+    position: absolute;
+    content: "";
+    width: 1px;
+    height: 100%;
+    background-color: red;
+    top: 0;
+    left: 570px;
+    z-index: 10;
+}
+
+body::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 1px;
+    background-color: red;
+    top: 375px;
+    left: 0;
+    z-index: 10;
+}
+*/
+
 var addDisabledAttribute = function (elements) {
   for (var i = 0; i < elements.length; i++) {
     elements[i].disabled = true;
@@ -187,6 +211,19 @@ var mapPinMain = document.querySelector('.map__pin--main');
 var mapBooking = document.querySelector('.map');
 var addForm = document.querySelector('.ad-form');
 var mapFilters = document.querySelector('.map__filters');
+var MAP_PIN_WIDTH = 62;
+var MAP_PIN_HEIGHT = 80;
+var mapCircleCenterX = +(mapPinMain.style.left).split('px')[0] + MAP_PIN_WIDTH / 2;
+var mapCircleCenterY = +(mapPinMain.style.top).split('px')[0] + MAP_PIN_WIDTH / 2;
+var mapPinLocationX = mapCircleCenterX;
+var mapPinLocationY = +(mapPinMain.style.top).split('px')[0] + MAP_PIN_HEIGHT;
+// console.log(mapPinLocationX);
+// console.log(mapPinLocationY);
+
+var inputAddress = addForm.querySelector('#address');
+inputAddress.value = mapCircleCenterX + ', ' + mapCircleCenterY;
+// console.log(inputAddress.value);
+
 
 addDisabledAttribute(addForm.querySelectorAll('select, fieldset'));
 addDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'));
@@ -196,6 +233,7 @@ var activeMode = function () {
   addForm.classList.remove('ad-form--disabled');
   removeDisabledAttribute(addForm.querySelectorAll('select, fieldset'));
   removeDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'));
+  inputAddress.value = mapPinLocationX + ', ' + mapPinLocationY;
 };
 
 mapPinMain.addEventListener('mousedown', function (evt) {
