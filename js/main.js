@@ -1,6 +1,6 @@
 'use strict';
 
-/*
+
 var MIN_ROOM_NUMBER = 0;
 var MAX_ROOM_NUMBER = 4;
 var MIN_GUEST_NUMBER = 1;
@@ -17,9 +17,10 @@ var TYPE_PLACES = ['palace', 'flat', 'house', 'bungalo'];
 var IN_OUT_TIMES = ['12:00', '13:00', '14:00'];
 var OBJECT_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var OBJECT_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
-*/
-/*
+
+
 var NUMBER_OBJECTS = 8;
+var mapBooking = document.querySelector('.map');
 
 var getRandomElement = function (array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -165,12 +166,11 @@ var getCard = function (data) {
 };
 
 mapBooking.insertBefore(getCard(arrayData[0]), filtersContainer);
-*/
+
 
 // module4-task2
 
 var mapPinMain = document.querySelector('.map__pin--main');
-var mapBooking = document.querySelector('.map');
 var addForm = document.querySelector('.ad-form');
 var mapFilters = document.querySelector('.map__filters');
 var MAP_PIN_WIDTH = 62;
@@ -187,13 +187,13 @@ var capacityRooms = addForm.room_number;
 var capacityGuests = addForm.capacity;
 
 var addDisabledAttribute = function (elements) {
-  for (var i = 0; i < elements.length; i++) {
+  for (i = 0; i < elements.length; i++) {
     elements[i].disabled = true;
   }
 };
 
 var removeDisabledAttribute = function (elements) {
-  for (var i = 0; i < elements.length; i++) {
+  for (i = 0; i < elements.length; i++) {
     elements[i].disabled = false;
   }
 };
@@ -203,7 +203,7 @@ addDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'));
 
 var relationRoomsGuest = function () {
 
-  for (var i = 0; i < capacityGuests.length; i++) {
+  for (i = 0; i < capacityGuests.length; i++) {
     capacityGuests.options[i].disabled = true;
   }
 
