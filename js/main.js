@@ -18,8 +18,11 @@ var IN_OUT_TIMES = ['12:00', '13:00', '14:00'];
 var OBJECT_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var OBJECT_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
-
 var NUMBER_OBJECTS = 8;
+
+var MAP_PIN_WIDTH = 62;
+var MAP_PIN_HEIGHT = 80;
+
 var mapBooking = document.querySelector('.map');
 
 var getRandomElement = function (array) {
@@ -173,8 +176,6 @@ mapBooking.insertBefore(getCard(arrayData[0]), filtersContainer);
 var mapPinMain = document.querySelector('.map__pin--main');
 var addForm = document.querySelector('.ad-form');
 var mapFilters = document.querySelector('.map__filters');
-var MAP_PIN_WIDTH = 62;
-var MAP_PIN_HEIGHT = 80;
 var mapCircleCenterX = +(mapPinMain.style.left).split('px')[0] + MAP_PIN_WIDTH / 2;
 var mapCircleCenterY = +(mapPinMain.style.top).split('px')[0] + MAP_PIN_WIDTH / 2;
 var mapPinLocationX = mapCircleCenterX;
