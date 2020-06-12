@@ -169,32 +169,6 @@ mapBooking.insertBefore(getCard(arrayData[0]), filtersContainer);
 
 // module4-task2
 
-// Единственное доступное действие в неактивном состоянии — перемещение метки .map__pin--main, являющейся контролом указания адреса объявления. Первое взаимодействие с меткой (mousedown) переводит страницу в активное состояние.
-
-/*
-ody::before {
-    position: absolute;
-    content: "";
-    width: 1px;
-    height: 100%;
-    background-color: red;
-    top: 0;
-    left: 570px;
-    z-index: 10;
-}
-
-body::after {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 1px;
-    background-color: red;
-    top: 375px;
-    left: 0;
-    z-index: 10;
-}
-*/
-
 var mapPinMain = document.querySelector('.map__pin--main');
 var mapBooking = document.querySelector('.map');
 var addForm = document.querySelector('.ad-form');
