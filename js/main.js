@@ -195,18 +195,6 @@ body::after {
 }
 */
 
-var addDisabledAttribute = function (elements) {
-  for (var i = 0; i < elements.length; i++) {
-    elements[i].disabled = true;
-  }
-};
-
-var removeDisabledAttribute = function (elements) {
-  for (var i = 0; i < elements.length; i++) {
-    elements[i].disabled = false;
-  }
-};
-
 var mapPinMain = document.querySelector('.map__pin--main');
 var mapBooking = document.querySelector('.map');
 var addForm = document.querySelector('.ad-form');
@@ -221,12 +209,26 @@ var mapPinLocationY = +(mapPinMain.style.top).split('px')[0] + MAP_PIN_HEIGHT;
 var inputAddress = addForm.querySelector('#address');
 inputAddress.value = mapCircleCenterX + ', ' + mapCircleCenterY;
 
-
 var capacityRooms = addForm.room_number;
 var capacityGuests = addForm.capacity;
 
+var addDisabledAttribute = function (elements) {
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].disabled = true;
+  }
+};
+
+var removeDisabledAttribute = function (elements) {
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].disabled = false;
+  }
+};
+
+addDisabledAttribute(addForm.querySelectorAll('select, fieldset'));
+addDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'));
 
 var relationRoomsGuest = function () {
+
   for (var i = 0; i < capacityGuests.length; i++) {
     capacityGuests.options[i].disabled = true;
   }
@@ -249,9 +251,6 @@ var relationRoomsGuest = function () {
   }
 };
 
-
-addDisabledAttribute(addForm.querySelectorAll('select, fieldset'));
-addDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'));
 
 var activeMode = function () {
   mapBooking.classList.remove('map--faded');
