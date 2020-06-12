@@ -279,6 +279,3 @@ mapPinMain.addEventListener('keydown', function (evt) {
 capacityRooms.addEventListener('change', function () {
   relationRoomsGuest();
 });
-
-// console.log(capacityRooms);
-// console.log(capacityGuests);
