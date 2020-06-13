@@ -206,13 +206,12 @@ var optionsEnable = function () {
   }
 };
 
-var relationRoomsGuest2 = function () {
+var validationRoomsGuests = function () {
   addDisabledAttribute(capacityGuests);
 
   if (capacityRooms[capacityRooms.selectedIndex].value === '100') {
     capacityGuests.options[capacityGuests.length - 1].selected = true;
     capacityGuests.options[capacityGuests.length - 1].disabled = false;
-
   } else {
     for (i = 0; i < capacityGuests.length; i++) {
       if (capacityRooms[capacityRooms.selectedIndex].value === capacityGuests.options[i].value) {
@@ -230,7 +229,7 @@ var activeMode = function () {
   removeDisabledAttribute(addForm.querySelectorAll('select, fieldset'));
   removeDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'));
   inputAddress.value = mapPinLocationX + ', ' + mapPinLocationY;
-  relationRoomsGuest2();
+  validationRoomsGuests();
 };
 
 mapPinMain.addEventListener('mousedown', function (evt) {
@@ -248,5 +247,5 @@ mapPinMain.addEventListener('keydown', function (evt) {
 });
 
 capacityRooms.addEventListener('change', function () {
-  relationRoomsGuest2();
+  validationRoomsGuests();
 });
