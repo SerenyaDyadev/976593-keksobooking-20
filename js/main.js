@@ -223,7 +223,6 @@ var relationRoomsGuest2 = function () {
   }
 };
 
-
 var activeMode = function () {
   mapBooking.appendChild(fragmentMapPin);
   mapBooking.classList.remove('map--faded');
