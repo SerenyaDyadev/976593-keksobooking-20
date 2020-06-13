@@ -109,10 +109,8 @@ for (var i = 0; i < arrayData.length; i++) {
   fragmentMapPin.appendChild(renderPin(arrayData[i]));
 }
 
-mapBooking.appendChild(fragmentMapPin);
-
 // Вставка карточек с описанием для пинов //
-
+/*
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 var filtersContainer = document.querySelector('.map__filters-container');
 
@@ -168,8 +166,8 @@ var getCard = function (data) {
   return cardElement;
 };
 
-mapBooking.insertBefore(getCard(arrayData[0]), filtersContainer);
-
+// mapBooking.insertBefore(getCard(arrayData[0]), filtersContainer);
+*/
 
 // module4-task2
 
@@ -183,9 +181,6 @@ var mapPinLocationY = +(mapPinMain.style.top).split('px')[0] + MAP_PIN_HEIGHT;
 
 var inputAddress = addForm.querySelector('#address');
 inputAddress.value = mapCircleCenterX + ', ' + mapCircleCenterY;
-
-var capacityRooms = addForm.room_number;
-var capacityGuests = addForm.capacity;
 
 var addDisabledAttribute = function (elements) {
   for (i = 0; i < elements.length; i++) {
@@ -202,38 +197,41 @@ var removeDisabledAttribute = function (elements) {
 addDisabledAttribute(addForm.querySelectorAll('select, fieldset'));
 addDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'));
 
-var relationRoomsGuest = function () {
+var capacityRooms = addForm.rooms;
+var capacityGuests = addForm.capacity;
 
-  for (i = 0; i < capacityGuests.length; i++) {
-    capacityGuests.options[i].disabled = true;
+var optionsEnable = function () {
+  for (var j = capacityGuests.selectedIndex; j < capacityGuests.length - 1; j++) {
+    capacityGuests.options[j].disabled = false;
   }
+};
 
-  if (capacityRooms.selectedIndex === 0) {
-    capacityGuests.options[2].disabled = false;
-    capacityGuests.options[2].selected = true;
-  } else if (capacityRooms.selectedIndex === 1) {
-    capacityGuests.options[1].disabled = false;
-    capacityGuests.options[2].disabled = false;
-    capacityGuests.options[1].selected = true;
-  } else if (capacityRooms.selectedIndex === 2) {
-    capacityGuests.options[0].disabled = false;
-    capacityGuests.options[1].disabled = false;
-    capacityGuests.options[2].disabled = false;
-    capacityGuests.options[0].selected = true;
-  } else if (capacityRooms.selectedIndex === 3) {
-    capacityGuests.options[3].disabled = false;
-    capacityGuests.options[3].selected = true;
+var relationRoomsGuest2 = function () {
+  addDisabledAttribute(capacityGuests);
+
+  if (capacityRooms[capacityRooms.selectedIndex].value === '100') {
+    capacityGuests.options[capacityGuests.length - 1].selected = true;
+    capacityGuests.options[capacityGuests.length - 1].disabled = false;
+
+  } else {
+    for (i = 0; i < capacityGuests.length; i++) {
+      if (capacityRooms[capacityRooms.selectedIndex].value === capacityGuests.options[i].value) {
+        capacityGuests.options[i].selected = true;
+        optionsEnable();
+      }
+    }
   }
 };
 
 
 var activeMode = function () {
+  mapBooking.appendChild(fragmentMapPin);
   mapBooking.classList.remove('map--faded');
   addForm.classList.remove('ad-form--disabled');
   removeDisabledAttribute(addForm.querySelectorAll('select, fieldset'));
   removeDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'));
   inputAddress.value = mapPinLocationX + ', ' + mapPinLocationY;
-  relationRoomsGuest();
+  relationRoomsGuest2();
 };
 
 mapPinMain.addEventListener('mousedown', function (evt) {
@@ -251,5 +249,5 @@ mapPinMain.addEventListener('keydown', function (evt) {
 });
 
 capacityRooms.addEventListener('change', function () {
-  relationRoomsGuest();
+  relationRoomsGuest2();
 });
