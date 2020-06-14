@@ -222,6 +222,29 @@ var validationRoomsGuests = function () {
   }
 };
 
+var typePlace = addForm.type;
+var pricePlace = addForm.price;
+
+var typesAndPrices = {
+  bungalo: 0,
+  flat: 1000,
+  house: 5000,
+  palace: 10000
+};
+
+var validationTypePrice = function () {
+  pricePlace.min = typesAndPrices[typePlace.options[typePlace.selectedIndex].value];
+  pricePlace.placeholder = typesAndPrices[typePlace.options[typePlace.selectedIndex].value];
+};
+
+var timeCheckin = addForm.timein;
+var timeCheckout = addForm.timeout;
+
+var validationTime = function () {
+  timeCheckout.options[timeCheckin.selectedIndex].selected = true;
+};
+
+
 var activeMode = function () {
   mapBooking.appendChild(fragmentMapPin);
   mapBooking.classList.remove('map--faded');
@@ -230,6 +253,8 @@ var activeMode = function () {
   removeDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'));
   inputAddress.value = mapPinLocationX + ', ' + mapPinLocationY;
   validationRoomsGuests();
+  validationTypePrice();
+  validationTime();
 };
 
 mapPinMain.addEventListener('mousedown', function (evt) {
@@ -250,10 +275,17 @@ capacityRooms.addEventListener('change', function () {
   validationRoomsGuests();
 });
 
+typePlace.addEventListener('change', function () {
+  validationTypePrice();
+});
+
+timeCheckin.addEventListener('change', function () {
+  validationTime();
+});
+
 
 // module4-task3
-// var mapPins = mapBooking.querySelectorAll('.map__pin');
-// console.log(mapPins);
+
 
 var searchNeedArrayData = function (atr) {
   for (i = 0; i < arrayData.length; i++) {
@@ -268,6 +300,7 @@ var closeCard = function () {
   var article = mapBooking.querySelector('.map__card');
   article.parentNode.removeChild(article);
   mapBooking.removeEventListener('keydown', onClosePopupEsc);
+  mapBooking.removeEventListener('keydown', onClosePopup);
 };
 
 var onClosePopup = function (evt) {
@@ -319,3 +352,5 @@ mapBooking.addEventListener('keydown', function (evt) {
     openCard(evt);
   }
 });
+
+
