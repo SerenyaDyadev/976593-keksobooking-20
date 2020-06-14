@@ -110,7 +110,7 @@ for (var i = 0; i < arrayData.length; i++) {
 }
 
 // Вставка карточек с описанием для пинов //
-/*
+
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 var filtersContainer = document.querySelector('.map__filters-container');
 
@@ -167,7 +167,7 @@ var getCard = function (data) {
 };
 
 // mapBooking.insertBefore(getCard(arrayData[0]), filtersContainer);
-*/
+
 
 // module4-task2
 
@@ -248,4 +248,71 @@ mapPinMain.addEventListener('keydown', function (evt) {
 
 capacityRooms.addEventListener('change', function () {
   validationRoomsGuests();
+});
+
+
+// module4-task3
+// var mapPins = mapBooking.querySelectorAll('.map__pin');
+// console.log(mapPins);
+
+var searchNeedArrayData = function (atr) {
+  for (i = 0; i < arrayData.length; i++) {
+    if (arrayData[i].author.avatar === atr) {
+      var index = i;
+    }
+  }
+  return index;
+};
+
+var closeCard = function () {
+  var article = mapBooking.querySelector('.map__card');
+  article.parentNode.removeChild(article);
+  mapBooking.removeEventListener('keydown', onCloseCardEsc);
+};
+
+var onCloseCardEsc = function (evt) {
+  if (evt.key === 'Escape') {
+    closeCard();
+  }
+};
+
+var openCard = function (evt) {
+
+  if (evt.target.alt !== 'Метка объявления' && evt.target.tagName === 'IMG') {
+    // Сделайте так, чтобы одновременно могла быть открыта только одна карточка объявления.
+    if (mapBooking.querySelectorAll('.map__card').length === 1) {
+      closeCard();
+    }
+
+    var srcImgAuthor = evt.target.attributes[0].textContent;
+    mapBooking.insertBefore(getCard(arrayData[searchNeedArrayData(srcImgAuthor)]), filtersContainer);
+  }
+
+  if (evt.target.className === 'map__pin') {
+    // Сделайте так, чтобы одновременно могла быть открыта только одна карточка объявления.
+    if (mapBooking.querySelectorAll('.map__card').length === 1) {
+      closeCard();
+    }
+
+    var srcChildrenImgAuthor = evt.target.children[0].attributes[0].textContent;
+    mapBooking.insertBefore(getCard(arrayData[searchNeedArrayData(srcChildrenImgAuthor)]), filtersContainer);
+  }
+
+  mapBooking.addEventListener('keydown', onCloseCardEsc);
+};
+/*
+if (mapBooking.querySelector('.map__card')) {
+  closeCard();
+}
+*/
+mapBooking.addEventListener('click', function (evt) {
+  evt.preventDefault();
+  openCard(evt);
+});
+
+mapBooking.addEventListener('click', function (evt) {
+  evt.preventDefault();
+  if (evt.key === 'Enter') {
+    openCard(evt);
+  }
 });
