@@ -267,17 +267,22 @@ var searchNeedArrayData = function (atr) {
 var closeCard = function () {
   var article = mapBooking.querySelector('.map__card');
   article.parentNode.removeChild(article);
-  mapBooking.removeEventListener('keydown', onCloseCardEsc);
+  mapBooking.removeEventListener('keydown', onClosePopupEsc);
 };
 
-var onCloseCardEsc = function (evt) {
+var onClosePopup = function (evt) {
+  if (evt.target.className === 'popup__close') {
+    closeCard();
+  }
+};
+
+var onClosePopupEsc = function (evt) {
   if (evt.key === 'Escape') {
     closeCard();
   }
 };
 
 var openCard = function (evt) {
-
   if (evt.target.alt !== 'Метка объявления' && evt.target.tagName === 'IMG') {
     // Сделайте так, чтобы одновременно могла быть открыта только одна карточка объявления.
     if (mapBooking.querySelectorAll('.map__card').length === 1) {
@@ -298,19 +303,17 @@ var openCard = function (evt) {
     mapBooking.insertBefore(getCard(arrayData[searchNeedArrayData(srcChildrenImgAuthor)]), filtersContainer);
   }
 
-  mapBooking.addEventListener('keydown', onCloseCardEsc);
+  mapBooking.addEventListener('keydown', onClosePopupEsc);
+
+  mapBooking.addEventListener('click', onClosePopup);
 };
-/*
-if (mapBooking.querySelector('.map__card')) {
-  closeCard();
-}
-*/
+
 mapBooking.addEventListener('click', function (evt) {
   evt.preventDefault();
   openCard(evt);
 });
 
-mapBooking.addEventListener('click', function (evt) {
+mapBooking.addEventListener('keydown', function (evt) {
   evt.preventDefault();
   if (evt.key === 'Enter') {
     openCard(evt);
