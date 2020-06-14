@@ -1,5 +1,6 @@
 'use strict';
 
+
 var MIN_ROOM_NUMBER = 0;
 var MAX_ROOM_NUMBER = 4;
 var MIN_GUEST_NUMBER = 1;
@@ -18,6 +19,11 @@ var OBJECT_FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'c
 var OBJECT_PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 
 var NUMBER_OBJECTS = 8;
+
+var MAP_PIN_WIDTH = 62;
+var MAP_PIN_HEIGHT = 80;
+
+var mapBooking = document.querySelector('.map');
 
 var getRandomElement = function (array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -84,8 +90,8 @@ var getArrayObjects = function (number) {
 var arrayData = getArrayObjects(NUMBER_OBJECTS);
 // Вставка Объектов пинов на карту //
 
-var mapBooking = document.querySelector('.map');
-mapBooking.classList.remove('map--faded');
+// var mapBooking = document.querySelector('.map');
+// mapBooking.classList.remove('map--faded');
 var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 var fragmentMapPin = document.createDocumentFragment();
 
@@ -103,10 +109,8 @@ for (var i = 0; i < arrayData.length; i++) {
   fragmentMapPin.appendChild(renderPin(arrayData[i]));
 }
 
-mapBooking.appendChild(fragmentMapPin);
-
 // Вставка карточек с описанием для пинов //
-
+/*
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 var filtersContainer = document.querySelector('.map__filters-container');
 
@@ -162,4 +166,86 @@ var getCard = function (data) {
   return cardElement;
 };
 
-mapBooking.insertBefore(getCard(arrayData[0]), filtersContainer);
+// mapBooking.insertBefore(getCard(arrayData[0]), filtersContainer);
+*/
+
+// module4-task2
+
+var mapPinMain = document.querySelector('.map__pin--main');
+var addForm = document.querySelector('.ad-form');
+var mapFilters = document.querySelector('.map__filters');
+var mapCircleCenterX = +(mapPinMain.style.left).split('px')[0] + MAP_PIN_WIDTH / 2;
+var mapCircleCenterY = +(mapPinMain.style.top).split('px')[0] + MAP_PIN_WIDTH / 2;
+var mapPinLocationX = mapCircleCenterX;
+var mapPinLocationY = +(mapPinMain.style.top).split('px')[0] + MAP_PIN_HEIGHT;
+
+var inputAddress = addForm.querySelector('#address');
+inputAddress.value = mapCircleCenterX + ', ' + mapCircleCenterY;
+
+var addDisabledAttribute = function (elements) {
+  for (i = 0; i < elements.length; i++) {
+    elements[i].disabled = true;
+  }
+};
+
+var removeDisabledAttribute = function (elements) {
+  for (i = 0; i < elements.length; i++) {
+    elements[i].disabled = false;
+  }
+};
+
+addDisabledAttribute(addForm.querySelectorAll('select, fieldset'));
+addDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'));
+
+var capacityRooms = addForm.rooms;
+var capacityGuests = addForm.capacity;
+
+var optionsEnable = function () {
+  for (var j = capacityGuests.selectedIndex; j < capacityGuests.length - 1; j++) {
+    capacityGuests.options[j].disabled = false;
+  }
+};
+
+var validationRoomsGuests = function () {
+  addDisabledAttribute(capacityGuests);
+
+  if (capacityRooms[capacityRooms.selectedIndex].value === '100') {
+    capacityGuests.options[capacityGuests.length - 1].selected = true;
+    capacityGuests.options[capacityGuests.length - 1].disabled = false;
+  } else {
+    for (i = 0; i < capacityGuests.length; i++) {
+      if (capacityRooms[capacityRooms.selectedIndex].value === capacityGuests.options[i].value) {
+        capacityGuests.options[i].selected = true;
+        optionsEnable();
+      }
+    }
+  }
+};
+
+var activeMode = function () {
+  mapBooking.appendChild(fragmentMapPin);
+  mapBooking.classList.remove('map--faded');
+  addForm.classList.remove('ad-form--disabled');
+  removeDisabledAttribute(addForm.querySelectorAll('select, fieldset'));
+  removeDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'));
+  inputAddress.value = mapPinLocationX + ', ' + mapPinLocationY;
+  validationRoomsGuests();
+};
+
+mapPinMain.addEventListener('mousedown', function (evt) {
+
+  if (evt.button === 0) {
+    activeMode();
+  }
+});
+
+mapPinMain.addEventListener('keydown', function (evt) {
+
+  if (evt.key === 'Enter') {
+    activeMode();
+  }
+});
+
+capacityRooms.addEventListener('change', function () {
+  validationRoomsGuests();
+});
