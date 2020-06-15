@@ -49,7 +49,7 @@ var getRandomQuantity = function (min, max) {
 };
 
 var getObject = function (number) {
-  var x = getRandomQuantity(X_RANGE_MIN, X_RANGE_MAX) - WIDTH_PIN / 2;
+  var x = getRandomQuantity(X_RANGE_MIN + WIDTH_PIN / 2, X_RANGE_MAX) - WIDTH_PIN / 2;
   var y = getRandomQuantity(Y_RANGE_MIN, Y_RANGE_MAX) - HEIGHT_PIN;
 
   var newObject = {
@@ -90,8 +90,6 @@ var getArrayObjects = function (number) {
 var arrayData = getArrayObjects(NUMBER_OBJECTS);
 // Вставка Объектов пинов на карту //
 
-// var mapBooking = document.querySelector('.map');
-// mapBooking.classList.remove('map--faded');
 var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 var fragmentMapPin = document.createDocumentFragment();
 
@@ -240,10 +238,13 @@ var validationTypePrice = function () {
 var timeCheckin = addForm.timein;
 var timeCheckout = addForm.timeout;
 
-var validationTime = function () {
+var validationTimeCheckout = function () {
   timeCheckout.options[timeCheckin.selectedIndex].selected = true;
 };
 
+var validationTimeCheckin = function () {
+  timeCheckin.options[timeCheckout.selectedIndex].selected = true;
+};
 
 var activeMode = function () {
   mapBooking.appendChild(fragmentMapPin);
@@ -254,7 +255,8 @@ var activeMode = function () {
   inputAddress.value = mapPinLocationX + ', ' + mapPinLocationY;
   validationRoomsGuests();
   validationTypePrice();
-  validationTime();
+  validationTimeCheckout();
+  validationTimeCheckin();
 };
 
 mapPinMain.addEventListener('mousedown', function (evt) {
@@ -280,9 +282,12 @@ typePlace.addEventListener('change', function () {
 });
 
 timeCheckin.addEventListener('change', function () {
-  validationTime();
+  validationTimeCheckout();
 });
 
+timeCheckout.addEventListener('change', function () {
+  validationTimeCheckin();
+});
 
 // module4-task3
 
@@ -316,7 +321,7 @@ var onClosePopupEsc = function (evt) {
 };
 
 var openCard = function (evt) {
-  if (evt.target.alt !== 'Метка объявления' && evt.target.tagName === 'IMG') {
+  if (evt.target.alt !== 'Метка объявления' && evt.target.tagName === 'IMG' && evt.target.className !== 'popup__photo') {
     // Сделайте так, чтобы одновременно могла быть открыта только одна карточка объявления.
     if (mapBooking.querySelectorAll('.map__card').length === 1) {
       closeCard();
