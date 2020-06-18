@@ -1,7 +1,6 @@
 'use strict';
 (function () {
   window.form = function () {
-    // var forms = document.querySelector('.ad-form');
     var addForm = document.querySelector('.ad-form');
     var mapFilters = document.querySelector('.map__filters');
 
