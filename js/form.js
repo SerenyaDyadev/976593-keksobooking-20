@@ -9,7 +9,7 @@
         elements[i].disabled = boolean;
       }
     };
-
+    console.log('111');
     addEnableDisabledAttribute(addForm.querySelectorAll('select, fieldset'), true);
     addEnableDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'), true);
 

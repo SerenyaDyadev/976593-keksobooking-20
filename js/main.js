@@ -8,7 +8,11 @@ var mapCircleCenterX = +(mapPinMain.style.left).split('px')[0] + MAP_PIN_WIDTH /
 var mapCircleCenterY = +(mapPinMain.style.top).split('px')[0] + MAP_PIN_WIDTH / 2;
 var mapPinLocationX = mapCircleCenterX;
 var mapPinLocationY = +(mapPinMain.style.top).split('px')[0] + MAP_PIN_HEIGHT;
+var inputs = document.querySelectorAll('select, fieldset');
 
+for (var i = 0; i < inputs.length; i++) {
+  inputs[i].disabled = true;
+}
 
 var inputAddress = document.querySelector('#address');
 inputAddress.value = mapCircleCenterX + ', ' + mapCircleCenterY;
