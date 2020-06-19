@@ -9,7 +9,7 @@
         elements[i].disabled = boolean;
       }
     };
-    console.log('111');
+
     addEnableDisabledAttribute(addForm.querySelectorAll('select, fieldset'), true);
     addEnableDisabledAttribute(mapFilters.querySelectorAll('select, fieldset'), true);
 
@@ -17,8 +17,8 @@
     var capacityGuests = addForm.querySelector('#capacity');
 
     var optionsEnable = function () {
-      for (var j = capacityGuests.selectedIndex; j < capacityGuests.length - 1; j++) {
-        capacityGuests.options[j].disabled = false;
+      for (var i = capacityGuests.selectedIndex; i < capacityGuests.length - 1; i++) {
+        capacityGuests.options[i].disabled = false;
       }
     };
 

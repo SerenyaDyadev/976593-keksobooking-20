@@ -17,7 +17,7 @@ for (var i = 0; i < inputs.length; i++) {
 var inputAddress = document.querySelector('#address');
 inputAddress.value = mapCircleCenterX + ', ' + mapCircleCenterY;
 
-for (var i = 0; i < window.data.length; i++) {
+for (i = 0; i < window.data.length; i++) {
   fragmentMapPin.appendChild(window.pin(window.data[i]));
 }
 
