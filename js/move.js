@@ -34,15 +34,6 @@
       mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
       mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
 
-      var locationX = mapPinMain.offsetLeft - shift.x + MAP_PIN_WIDTH / 2;
-      var locationY = mapPinMain.offsetTop - shift.y + MAP_PIN_HEIGHT;
-
-      inputAddress.value = locationX + ', ' + locationY;
-    };
-
-    var onMouseUp = function (upEvt) {
-      upEvt.preventDefault();
-
       var mapPinLocationX = mapPinMain.offsetLeft + MAP_PIN_WIDTH / 2;
       var mapPinLocationY = mapPinMain.offsetTop + MAP_PIN_HEIGHT;
 
@@ -63,6 +54,10 @@
       }
 
       inputAddress.value = mapPinLocationX + ', ' + mapPinLocationY;
+    };
+
+    var onMouseUp = function (upEvt) {
+      upEvt.preventDefault();
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
