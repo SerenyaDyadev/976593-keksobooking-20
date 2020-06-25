@@ -17,9 +17,23 @@ for (var i = 0; i < inputs.length; i++) {
 var inputAddress = document.querySelector('#address');
 inputAddress.value = mapCircleCenterX + ', ' + mapCircleCenterY;
 
-for (i = 0; i < window.data.length; i++) {
-  fragmentMapPin.appendChild(window.pin(window.data[i]));
-}
+// for (i = 0; i < window.data.length; i++) {
+//   fragmentMapPin.appendChild(window.pin(window.data[i]));
+// }
+
+var arrayData;
+
+var onLoadData = function (data) {
+
+  for (i = 0; i < data.length; i++) {
+    fragmentMapPin.appendChild(window.pin(data[i]));
+  }
+
+  arrayData = data;
+  return arrayData;
+};
+
+window.load(onLoadData);
 
 var activeMode = function () {
   window.map.appendChild(fragmentMapPin);
