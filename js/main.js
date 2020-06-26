@@ -17,15 +17,28 @@ for (var i = 0; i < inputs.length; i++) {
 var inputAddress = document.querySelector('#address');
 inputAddress.value = mapCircleCenterX + ', ' + mapCircleCenterY;
 
-for (i = 0; i < window.data.length; i++) {
-  fragmentMapPin.appendChild(window.pin(window.data[i]));
-}
+// for (i = 0; i < window.data.length; i++) {
+//   fragmentMapPin.appendChild(window.pin(window.data[i]));
+// }
 
-var activeMode = function () {
+var arrayData;
+
+var onLoadData = function (data) {
+
+  for (i = 0; i < data.length; i++) {
+    fragmentMapPin.appendChild(window.pin(data[i]));
+  }
   window.map.appendChild(fragmentMapPin);
   window.map.classList.remove('map--faded');
   inputAddress.value = mapPinLocationX + ', ' + mapPinLocationY;
   window.form();
+
+  arrayData = data;
+  return arrayData;
+};
+
+var activeMode = function () {
+  window.load(onLoadData);
 };
 
 mapPinMain.addEventListener('mousedown', function (evt) {
