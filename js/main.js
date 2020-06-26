@@ -28,18 +28,17 @@ var onLoadData = function (data) {
   for (i = 0; i < data.length; i++) {
     fragmentMapPin.appendChild(window.pin(data[i]));
   }
+  window.map.appendChild(fragmentMapPin);
+  window.map.classList.remove('map--faded');
+  inputAddress.value = mapPinLocationX + ', ' + mapPinLocationY;
+  window.form();
 
   arrayData = data;
   return arrayData;
 };
 
-window.load(onLoadData);
-
 var activeMode = function () {
-  window.map.appendChild(fragmentMapPin);
-  window.map.classList.remove('map--faded');
-  inputAddress.value = mapPinLocationX + ', ' + mapPinLocationY;
-  window.form();
+  window.load(onLoadData);
 };
 
 mapPinMain.addEventListener('mousedown', function (evt) {
