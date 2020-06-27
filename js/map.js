@@ -4,15 +4,6 @@
   var mapBooking = document.querySelector('.map');
   var filtersContainer = document.querySelector('.map__filters-container');
 
-  // var searchNeedArrayData = function (atr) {
-  //   for (var i = 0; i < window.data.length; i++) {
-  //     if (window.data[i].author.avatar === atr) {
-  //       var index = i;
-  //     }
-  //   }
-  //   return index;
-  // };
-
   var searchNeedArrayData = function (atr) {
     for (var i = 0; i < window.arrayData.length; i++) {
       if (window.arrayData[i].author.avatar === atr) {
