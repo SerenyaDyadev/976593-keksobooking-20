@@ -53,10 +53,19 @@ mapPinMain.addEventListener('keydown', function (evt) {
   }
 });
 
+
 var adForm = document.querySelector('.ad-form');
 adForm.addEventListener('submit', function (evt) {
   window.load('https://javascript.pages.academy/keksobooking', 'POST', function () {
-    window.resetForm();
+    window.save();
+    window.effect.success();
   }, new FormData(adForm));
   evt.preventDefault();
 });
+
+
+var formResetButton = adForm.querySelector('.ad-form__reset');
+formResetButton.addEventListener('submit', function () {
+  adForm.reset();
+});
+

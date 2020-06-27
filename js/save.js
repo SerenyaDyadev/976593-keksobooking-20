@@ -5,7 +5,7 @@
   var pinCircleDefaultLocalX = mapPinMain.style.left;
   var pinCircleDefaultLocalY = mapPinMain.style.top;
 
-  window.resetForm = function () {
+  window.save = function () {
     var pins = document.querySelectorAll('.map__pin');
 
     for (var i = 1; i < pins.length; i++) {
