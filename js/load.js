@@ -2,7 +2,7 @@
 (function () {
   var errorMessage = document.querySelector('#error').content.querySelector('.error');
   var StatusCode = {
-    OK: 200
+    OK: 201
   };
 
   var TIMEOUT_IN_MS = 1000;
