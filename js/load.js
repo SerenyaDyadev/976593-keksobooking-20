@@ -1,5 +1,6 @@
 'use strict';
 (function () {
+  var errorMessage = document.querySelector('#error').content.querySelector('.error');
   var StatusCode = {
     OK: 200
   };
@@ -16,15 +17,15 @@
       if (xhr.status === StatusCode.OK) {
         onLoad(xhr.response);
       } else {
-        window.effect.error();
+        window.effect(errorMessage);
       }
     });
 
     xhr.addEventListener('error', function () {
-      window.effect.error();
+      window.effect(errorMessage);
     });
     xhr.addEventListener('timeout', function () {
-      window.effect.error();
+      window.effect(errorMessage);
     });
 
     xhr.timeout = TIMEOUT_IN_MS;

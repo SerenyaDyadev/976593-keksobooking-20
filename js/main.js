@@ -9,6 +9,7 @@ var mapCircleCenterY = +(mapPinMain.style.top).split('px')[0] + MAP_PIN_WIDTH / 
 var mapPinLocationX = mapCircleCenterX;
 var mapPinLocationY = +(mapPinMain.style.top).split('px')[0] + MAP_PIN_HEIGHT;
 var inputs = document.querySelectorAll('select, fieldset');
+var successMessage = document.querySelector('#success').content.querySelector('.success');
 
 
 for (var i = 0; i < inputs.length; i++) {
@@ -57,8 +58,8 @@ mapPinMain.addEventListener('keydown', function (evt) {
 var adForm = document.querySelector('.ad-form');
 adForm.addEventListener('submit', function (evt) {
   window.load('https://javascript.pages.academy/keksobooking', 'POST', function () {
-    window.save();
-    window.effect.success();
+    window.publish();
+    window.effect(successMessage);
   }, new FormData(adForm));
   evt.preventDefault();
 });
