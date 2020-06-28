@@ -58,7 +58,7 @@ mapPinMain.addEventListener('keydown', function (evt) {
 var adForm = document.querySelector('.ad-form');
 adForm.addEventListener('submit', function (evt) {
   window.load('https://javascript.pages.academy/keksobooking', 'POST', function () {
-    window.publish();
+    window.clear();
     window.effect(successMessage);
   }, new FormData(adForm));
   evt.preventDefault();
@@ -66,7 +66,7 @@ adForm.addEventListener('submit', function (evt) {
 
 
 var formResetButton = adForm.querySelector('.ad-form__reset');
-formResetButton.addEventListener('submit', function () {
-  adForm.reset();
+formResetButton.addEventListener('click', function () {
+  window.clear();
 });
 
