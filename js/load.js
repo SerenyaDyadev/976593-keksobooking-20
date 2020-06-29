@@ -1,18 +1,36 @@
 'use strict';
 (function () {
-  var URL = 'https://javascript.pages.academy/keksobooking/data';
+  var errorMessage = document.querySelector('#error').content.querySelector('.error');
+  var StatusCode = {
+    OK: 200
+  };
 
-  window.load = function (onLoad) {
+  var TIMEOUT_IN_MS = 1000;
+
+  window.load = function (URL, action, onLoad, data) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
-    xhr.open('GET', URL);
+    xhr.open(action, URL);
 
     xhr.addEventListener('load', function () {
-      onLoad(xhr.response);
+      if (xhr.status === StatusCode.OK) {
+        onLoad(xhr.response);
+      } else {
+        window.effect(errorMessage);
+      }
     });
 
-    xhr.send();
+    xhr.addEventListener('error', function () {
+      window.effect(errorMessage);
+    });
+    xhr.addEventListener('timeout', function () {
+      window.effect(errorMessage);
+    });
+
+    xhr.timeout = TIMEOUT_IN_MS;
+
+    xhr.send(data);
   };
 })();
 
