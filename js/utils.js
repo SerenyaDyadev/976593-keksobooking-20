@@ -14,6 +14,14 @@
       document.querySelector('#address').value = x + ', ' + y;
     },
 
+    deletePins: function () {
+      var pins = document.querySelectorAll('.map__pin');
+
+      for (var i = 1; i < pins.length; i++) {
+        pins[i].remove();
+      }
+    },
+
   };
 
 })();

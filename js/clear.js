@@ -6,11 +6,8 @@
   var pinCircleDefaultLocalY = mapPinMain.style.top;
 
   window.clear = function () {
-    var pins = document.querySelectorAll('.map__pin');
 
-    for (var i = 1; i < pins.length; i++) {
-      pins[i].remove();
-    }
+    window.utils.deletePins();
 
     mapPinMain.style.left = pinCircleDefaultLocalX;
     mapPinMain.style.top = pinCircleDefaultLocalY;
