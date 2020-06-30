@@ -17,6 +17,12 @@ var onLoadData = function (data) {
   window.utils.addressInputValue(mapPinLocationX, mapPinLocationY);
 };
 
+var onResetForm = function () {
+  window.utils.disableInputs();
+  window.clear();
+  window.utils.addressInputValue(mapCircleCenterX, mapCircleCenterY);
+};
+
 var activeMode = function () {
   window.load('https://javascript.pages.academy/keksobooking/data', 'GET', onLoadData);
 };
@@ -39,9 +45,7 @@ mapPinMain.addEventListener('keydown', function (evt) {
 var adForm = document.querySelector('.ad-form');
 adForm.addEventListener('submit', function (evt) {
   window.load('https://javascript.pages.academy/keksobooking', 'POST', function () {
-    window.utils.disableInputs();
-    window.clear();
-    window.utils.addressInputValue(mapCircleCenterX, mapCircleCenterY);
+    onResetForm();
     window.effect(successMessage);
   }, new FormData(adForm));
   evt.preventDefault();
@@ -50,8 +54,6 @@ adForm.addEventListener('submit', function (evt) {
 
 var formResetButton = adForm.querySelector('.ad-form__reset');
 formResetButton.addEventListener('click', function () {
-  window.utils.disableInputs();
-  window.clear();
-  window.utils.addressInputValue(mapCircleCenterX, mapCircleCenterY);
+  onResetForm();
 });
 

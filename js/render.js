@@ -1,7 +1,6 @@
 'use strict';
 (function () {
-  var MAX_PIN_COUNT = 5;
-  var arrayData;
+  var MAX_PIN_COUNT = 6;
   var fragmentMapPin = document.createDocumentFragment();
 
   window.render = function (data) {
@@ -14,7 +13,6 @@
     window.map.classList.remove('map--faded');
     window.form();
 
-    arrayData = data;
-    return arrayData;
+    window.arrayData = data;
   };
 })();
