@@ -16,12 +16,17 @@
 
     deletePins: function () {
       var pins = document.querySelectorAll('.map__pin');
-
       for (var i = 1; i < pins.length; i++) {
         pins[i].remove();
       }
     },
 
+    closePopupCard: function () {
+      var popup = document.querySelector('.map__card');
+      if (document.querySelector('.map__card')) {
+        popup.parentNode.removeChild(popup);
+      }
+    }
   };
 
 })();

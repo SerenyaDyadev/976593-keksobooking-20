@@ -4,6 +4,9 @@
 
 
   window.render = function (data) {
+
+    window.utils.closePopupCard();
+
     window.utils.deletePins();
 
     var fragmentMapPin = document.createDocumentFragment();

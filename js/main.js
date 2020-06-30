@@ -14,28 +14,14 @@ window.utils.addressInputValue(mapCircleCenterX, mapCircleCenterY);
 
 var loadPins;
 
-// var accommodationTypes = {
-//   flat: 'Квартира',
-//   bungalo: 'Бунгало',
-//   house: 'Дом',
-//   palace: 'Дворец'
-// };
-
 var updateData = function () {
-  // console.log(loadPins);
-  // console.log(housingType[housingType.selectedIndex].value);
-  // console.log(loadPins[0].offer.type);
   if (housingType[housingType.selectedIndex].value !== 'any') {
     var newData = loadPins.filter(function (it) {
-      // console.log(it.offer.type);
-      // console.log(housingType[housingType.selectedIndex].value);
-      // console.log(it.offer.type === housingType[housingType.selectedIndex].value);
       return it.offer.type === housingType[housingType.selectedIndex].value;
     });
   } else {
     newData = loadPins;
   }
-  // console.log(newData);
   window.render(newData);
 };
 
