@@ -15,13 +15,14 @@ window.utils.addressInputValue(mapCircleCenterX, mapCircleCenterY);
 var loadPins;
 
 var updateData = function () {
+  var newData = loadPins;
+
   if (housingType[housingType.selectedIndex].value !== 'any') {
-    var newData = loadPins.filter(function (it) {
+    newData = loadPins.filter(function (it) {
       return it.offer.type === housingType[housingType.selectedIndex].value;
     });
-  } else {
-    newData = loadPins;
   }
+
   window.render(newData);
 };
 
@@ -33,7 +34,7 @@ housingType.addEventListener('change', function () {
 
 var onLoadData = function (data) {
   loadPins = data;
-  updateData();
+  updateData(loadPins);
   window.utils.addressInputValue(mapPinLocationX, mapPinLocationY);
 };
 
