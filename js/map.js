@@ -14,8 +14,7 @@
   };
 
   var closeCard = function () {
-    var article = mapBooking.querySelector('.map__card');
-    article.parentNode.removeChild(article);
+    window.utils.closePopupCard();
     mapBooking.removeEventListener('keydown', onClosePopupEsc);
     mapBooking.removeEventListener('keydown', onClosePopup);
   };
