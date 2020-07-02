@@ -23,8 +23,7 @@ filter.addEventListener('change', function (evt) {
   } else {
     features.splice(features.indexOf(evt.target.value), 1);
   }
-
-  window.filters.updateData(loadPins, features);
+  window.debounce(window.filters.updateData(loadPins, features));
 });
 
 var onLoadData = function (data) {
