@@ -20,6 +20,7 @@ var priceType = {
 };
 
 var updateData = function () {
+  // console.log(loadPins);
   var typeData = loadPins;
 
   if (housingType[housingType.selectedIndex].value !== 'any') {
@@ -28,7 +29,7 @@ var updateData = function () {
     });
   }
 
-  console.log(typeData);
+  // console.log(typeData);
 
   var priceData = typeData;
 
@@ -45,7 +46,7 @@ var updateData = function () {
   }
 
 
-  console.log(priceData);
+  // console.log(priceData);
 
   var roomsData = priceData;
 
@@ -55,8 +56,8 @@ var updateData = function () {
     });
   }
 
-  console.log(roomsData);
-  console.log('roomsData');
+  // console.log(roomsData);
+  // console.log('roomsData');
 
   var guestsData = roomsData;
 
@@ -66,22 +67,41 @@ var updateData = function () {
     });
   }
 
-  console.log(guestsData);
-  console.log('guestsData');
-
-  // var featuresData = guestsData;
-  // console.log(housingFeatures);
-  // if (housingGuests[housingGuests.selectedIndex].value !== 'any') {
-  //   guestsData = roomsData.filter(function (it) {
-  //     return String(it.offer.guests) === housingGuests[housingGuests.selectedIndex].value;
-  //   });
-  // }
-
   // console.log(guestsData);
   // console.log('guestsData');
 
+  var featuresData = guestsData;
 
-  window.render(guestsData);
+  // if (features.length !== 0) {
+  //   for (var i = 0; i < features.length; i++) {
+  //     featuresData = guestsData.filter(function (it) {
+  //       return it.offer.features.indexOf(features[i]) !== -1;
+  //     });
+  //   }
+  // }
+
+
+  if (features.length !== 0) {
+    featuresData = guestsData.filter(function (it) {
+      for (var i = 0; i < features.length; i++) {
+        var index = 0;
+        if (it.offer.features.indexOf(features[i]) === -1) {
+          index++;
+          break;
+        }
+        console.log(it.offer.features);
+        console.log(features[i]);
+        console.log(index);
+      }
+      return index === 0;
+    });
+  }
+
+  console.log(featuresData);
+  console.log('featuresData');
+
+
+  window.render(featuresData);
 };
 
 var housingType = document.querySelector('#housing-type');
@@ -109,11 +129,21 @@ housingGuests.addEventListener('change', function () {
   updateData();
 });
 
-// var housingFeatures = document.querySelector('#housing-features');
+var housingFeatures = document.querySelector('#housing-features');
 
-// housingFeatures.addEventListener('change', function () {
-//   updateData();
-// });
+var features = [];
+
+housingFeatures.addEventListener('change', function (evt) {
+
+  if (evt.target.checked) {
+    features.push(evt.target.value);
+  } else {
+    features.splice(features.indexOf(evt.target.value), 1);
+  }
+
+  updateData();
+
+});
 
 var onLoadData = function (data) {
   loadPins = data;
