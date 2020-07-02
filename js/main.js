@@ -16,15 +16,25 @@ var loadPins;
 var features = [];
 
 var filter = document.querySelector('.map__filters');
-filter.addEventListener('change', function (evt) {
+// filter.addEventListener('change', function (evt) {
 
+// if (evt.target.checked) {
+// features.push(evt.target.value);
+// } else {
+// features.splice(features.indexOf(evt.target.value), 1);
+// }
+
+// window.debounce(window.filters.updateData(loadPins, features));
+// });
+
+filter.addEventListener('change', window.debounce(function (evt) {
   if (evt.target.checked) {
     features.push(evt.target.value);
   } else {
     features.splice(features.indexOf(evt.target.value), 1);
   }
-  window.debounce(window.filters.updateData(loadPins, features));
-});
+  window.filters.updateData(loadPins, features);
+}));
 
 var onLoadData = function (data) {
   loadPins = data;
