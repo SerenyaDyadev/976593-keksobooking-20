@@ -58,12 +58,12 @@
   };
 
   mapBooking.addEventListener('click', function (evt) {
-    evt.preventDefault();
+    // evt.preventDefault();
     openCard(evt);
   });
 
   mapBooking.addEventListener('keydown', function (evt) {
-    evt.preventDefault();
+    // evt.preventDefault();
     if (evt.key === 'Enter') {
       openCard(evt);
     }
