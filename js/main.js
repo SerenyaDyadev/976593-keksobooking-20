@@ -28,7 +28,7 @@ filter.addEventListener('change', window.debounce(function (evt) {
 
 var onLoadData = function (data) {
   loadPins = data;
-  window.render(data);
+  window.filters.updateData(loadPins, features);
   window.utils.addressInputValue(mapPinLocationX, mapPinLocationY);
 };
 
