@@ -25,12 +25,12 @@
     var validationRoomsGuests = function () {
       addEnableDisabledAttribute(capacityGuests, true);
 
-      if (capacityRooms[capacityRooms.selectedIndex].value === '100') {
+      if (capacityRooms.value === '100') {
         capacityGuests.options[capacityGuests.length - 1].selected = true;
         capacityGuests.options[capacityGuests.length - 1].disabled = false;
       } else {
         for (var i = 0; i < capacityGuests.length; i++) {
-          if (capacityRooms[capacityRooms.selectedIndex].value === capacityGuests.options[i].value) {
+          if (capacityRooms.value === capacityGuests.options[i].value) {
             capacityGuests.options[i].selected = true;
             optionsEnable();
           }

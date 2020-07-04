@@ -15,29 +15,29 @@
       var newData = data.filter(function (it) {
 
         var typeFlag = true;
-        if (housingType[housingType.selectedIndex].value !== 'any') {
-          typeFlag = String(it.offer.type) === housingType[housingType.selectedIndex].value;
+        if (housingType.value !== 'any') {
+          typeFlag = housingType.value !== 'any' && String(it.offer.type) === housingType.value;
         }
 
         var priceFlag = true;
-        if (housingPrice[housingPrice.selectedIndex].value !== 'any') {
-          if (housingPrice[housingPrice.selectedIndex].value === 'low') {
+        if (housingPrice.value !== 'any') {
+          if (housingPrice.value === 'low') {
             priceFlag = it.offer.price < priceType['low'];
-          } else if (housingPrice[housingPrice.selectedIndex].value === 'high') {
+          } else if (housingPrice.value === 'high') {
             priceFlag = it.offer.price > priceType['high'];
-          } else if (housingPrice[housingPrice.selectedIndex].value === 'middle') {
+          } else if (housingPrice.value === 'middle') {
             priceFlag = (it.offer.price >= priceType['low'] && it.offer.price <= priceType['high']);
           }
         }
 
         var roomsFlag = true;
-        if (housingRooms[housingRooms.selectedIndex].value !== 'any') {
-          roomsFlag = String(it.offer.rooms) === housingRooms[housingRooms.selectedIndex].value;
+        if (housingRooms.value !== 'any') {
+          roomsFlag = String(it.offer.rooms) === housingRooms.value;
         }
 
         var guestsFlag = true;
-        if (housingGuests[housingGuests.selectedIndex].value !== 'any') {
-          guestsFlag = String(it.offer.guests) === housingGuests[housingGuests.selectedIndex].value;
+        if (housingGuests.value !== 'any') {
+          guestsFlag = String(it.offer.guests) === housingGuests.value;
         }
 
         var featuresFlag = true;
