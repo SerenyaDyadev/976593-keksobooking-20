@@ -13,28 +13,22 @@ window.utils.disableInputs();
 window.utils.addressInputValue(mapCircleCenterX, mapCircleCenterY);
 
 var loadPins;
+var features = [];
 
-var updateData = function () {
-  var newData = loadPins;
+var filter = document.querySelector('.map__filters');
 
-  if (housingType[housingType.selectedIndex].value !== 'any') {
-    newData = loadPins.filter(function (it) {
-      return it.offer.type === housingType[housingType.selectedIndex].value;
-    });
+filter.addEventListener('change', window.debounce(function (evt) {
+  if (evt.target.checked) {
+    features.push(evt.target.value);
+  } else {
+    features.splice(features.indexOf(evt.target.value), 1);
   }
-
-  window.render(newData);
-};
-
-var housingType = document.querySelector('#housing-type');
-
-housingType.addEventListener('change', function () {
-  updateData();
-});
+  window.filters.updateData(loadPins, features);
+}));
 
 var onLoadData = function (data) {
   loadPins = data;
-  updateData(loadPins);
+  window.filters.updateData(loadPins, features);
   window.utils.addressInputValue(mapPinLocationX, mapPinLocationY);
 };
 
