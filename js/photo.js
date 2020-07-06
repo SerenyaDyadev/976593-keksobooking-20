@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var IMG_WIDTH = 55;
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
   window.photo = function (fromInput, toField) {
@@ -23,7 +24,7 @@
           } else {
             var previewImg = document.createElement('img');
             previewImg.src = reader.result;
-            previewImg.width = 55;
+            previewImg.width = IMG_WIDTH;
             toField.appendChild(previewImg);
           }
         });
