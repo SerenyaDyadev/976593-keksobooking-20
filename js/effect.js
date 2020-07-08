@@ -7,20 +7,20 @@
     var message = element.cloneNode(true);
     document.body.appendChild(message);
 
-    document.addEventListener('click', function () {
-      message.remove();
-    });
-
-    document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ESC_KEYCODE) {
+    var onMessageClose = function (evt) {
+      if (evt.target !== message.querySelector('.error__message') && evt.target !== message.querySelector('.success__message') || evt.target === message.querySelector('.error__button')) {
         message.remove();
       }
+    };
+
+    message.addEventListener('click', function (evt) {
+      onMessageClose(evt);
     });
 
-    if (message.querySelector('.error__button')) {
-      message.querySelector('.error__button').addEventListener('click', function () {
-        message.querySelector('.error__button').remove();
-      });
-    }
+    message.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === ESC_KEYCODE) {
+        onMessageClose(evt);
+      }
+    });
   };
 })();
