@@ -33,7 +33,6 @@
 
   var openCard = function (evt) {
     if (evt.target.alt !== 'Метка объявления' && evt.target.tagName === 'IMG' && evt.target.className !== 'popup__photo') {
-      // Сделайте так, чтобы одновременно могла быть открыта только одна карточка объявления.
       if (mapBooking.querySelectorAll('.map__card').length === 1) {
         closeCard();
       }
@@ -43,7 +42,6 @@
     }
 
     if (evt.target.className === 'map__pin') {
-      // Сделайте так, чтобы одновременно могла быть открыта только одна карточка объявления.
       if (mapBooking.querySelectorAll('.map__card').length === 1) {
         closeCard();
       }
@@ -58,12 +56,12 @@
   };
 
   mapBooking.addEventListener('click', function (evt) {
-    // evt.preventDefault();
+
     openCard(evt);
   });
 
   mapBooking.addEventListener('keydown', function (evt) {
-    // evt.preventDefault();
+
     if (evt.key === 'Enter') {
       openCard(evt);
     }
