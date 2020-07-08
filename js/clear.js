@@ -5,10 +5,21 @@
   var adForm = document.querySelector('.ad-form');
   var pinCircleDefaultLocalX = mapPinMain.style.left;
   var pinCircleDefaultLocalY = mapPinMain.style.top;
+  var avatarPhotoDefault = document.querySelector('.ad-form-header__preview').querySelector('img');
+  var avatarPhotoDefaultSrc = avatarPhotoDefault.src;
+  var previewPhoto = document.querySelector('.ad-form__photo');
 
   window.clear = function () {
+    var previewPhotoImg = previewPhoto.querySelector('img');
+
     window.utils.closePopupCard();
     window.utils.deletePins();
+
+    avatarPhotoDefault.src = avatarPhotoDefaultSrc;
+
+    if (previewPhoto.querySelector('img') !== null) {
+      previewPhotoImg.parentNode.removeChild(previewPhotoImg);
+    }
 
     mapPinMain.style.left = pinCircleDefaultLocalX;
     mapPinMain.style.top = pinCircleDefaultLocalY;

@@ -57,6 +57,15 @@ mapPinMain.addEventListener('keydown', function (evt) {
   }
 });
 
+var avatarChooser = document.querySelector('.ad-form-header__input');
+var previewAvatar = document.querySelector('.ad-form-header__preview').querySelector('img');
+
+window.photo(avatarChooser, previewAvatar);
+
+var photoAdForm = document.querySelector('.ad-form__input');
+var previewPhoto = document.querySelector('.ad-form__photo');
+
+window.photo(photoAdForm, previewPhoto);
 
 var adForm = document.querySelector('.ad-form');
 adForm.addEventListener('submit', function (evt) {
