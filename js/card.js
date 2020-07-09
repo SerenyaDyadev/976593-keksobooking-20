@@ -13,28 +13,28 @@
     palace: 'Дворец'
   };
 
-  var getPhotoSrc = function (photos) {
-    for (var i = 0; i < photos.length; i++) {
-      var photoElement = cardTemplate.querySelector('.popup__photo').cloneNode(true);
-      photoElement.src = photos[i];
-      fragmentPhoto.appendChild(photoElement);
-    }
-
-    return fragmentPhoto;
-  };
-
   var getFeatures = function (features) {
     var listFeauters = cardTemplate.querySelector('.popup__features').cloneNode(false);
 
-    for (var i = 0; i < features.length; i++) {
+    features.forEach(function (feature) {
       var listElement = document.createElement('li');
-      listElement.className = 'popup__feature popup__feature--' + features[i];
+      listElement.className = 'popup__feature popup__feature--' + feature;
       listFeauters.appendChild(listElement);
-    }
+    });
 
     fragmentWithFeatures.appendChild(listFeauters);
 
     return fragmentWithFeatures;
+  };
+
+  var getPhotoSrc = function (photos) {
+    photos.forEach(function (photo) {
+      var photoElement = cardTemplate.querySelector('.popup__photo').cloneNode(true);
+      photoElement.src = photo;
+      fragmentPhoto.appendChild(photoElement);
+    });
+
+    return fragmentPhoto;
   };
 
   var getCard = function (data) {
