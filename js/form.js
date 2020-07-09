@@ -1,5 +1,7 @@
 'use strict';
 (function () {
+  var MAX_ROOM_NUMBER_VALUE = '100';
+
   window.form = function () {
     var addForm = document.querySelector('.ad-form');
     var mapFilters = document.querySelector('.map__filters');
@@ -25,7 +27,7 @@
     var validationRoomsGuests = function () {
       addEnableDisabledAttribute(capacityGuests, true);
 
-      if (capacityRooms.value === '100') {
+      if (capacityRooms.value === MAX_ROOM_NUMBER_VALUE) {
         capacityGuests.options[capacityGuests.length - 1].selected = true;
         capacityGuests.options[capacityGuests.length - 1].disabled = false;
       } else {
