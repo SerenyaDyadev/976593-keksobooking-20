@@ -6,6 +6,8 @@
   var Y_RANGE_MIN = 130;
   var Y_RANGE_MAX = 630;
 
+  var MAP_PIN_WIDTH = 50;
+  var MAP_PIN_HEIGHT = 70;
   var mapPinMain = document.querySelector('.map__pin--main');
   var inputAddress = document.querySelector('#address');
 
@@ -33,22 +35,22 @@
       mapPinMain.style.top = (mapPinMain.offsetTop - shift.y) + 'px';
       mapPinMain.style.left = (mapPinMain.offsetLeft - shift.x) + 'px';
 
-      var mapPinLocationX = mapPinMain.offsetLeft + window.fixed.MAP_PIN_WIDTH / 2;
-      var mapPinLocationY = mapPinMain.offsetTop + window.fixed.MAP_PIN_HEIGHT;
+      var mapPinLocationX = mapPinMain.offsetLeft + MAP_PIN_WIDTH / 2;
+      var mapPinLocationY = mapPinMain.offsetTop + MAP_PIN_HEIGHT;
 
       if (mapPinLocationX < X_RANGE_MIN) {
-        mapPinMain.style.left = X_RANGE_MIN - window.fixed.MAP_PIN_WIDTH / 2 + 'px';
+        mapPinMain.style.left = X_RANGE_MIN - MAP_PIN_WIDTH / 2 + 'px';
         mapPinLocationX = X_RANGE_MIN;
       } else if (mapPinLocationX > X_RANGE_MAX) {
-        mapPinMain.style.left = X_RANGE_MAX - window.fixed.MAP_PIN_WIDTH / 2 + 'px';
+        mapPinMain.style.left = X_RANGE_MAX - MAP_PIN_WIDTH / 2 + 'px';
         mapPinLocationX = X_RANGE_MAX;
       }
 
       if (mapPinLocationY < Y_RANGE_MIN) {
-        mapPinMain.style.top = Y_RANGE_MIN - window.fixed.MAP_PIN_HEIGHT + 'px';
+        mapPinMain.style.top = Y_RANGE_MIN - MAP_PIN_HEIGHT + 'px';
         mapPinLocationY = Y_RANGE_MIN;
       } else if (mapPinLocationY > Y_RANGE_MAX) {
-        mapPinMain.style.top = Y_RANGE_MAX - window.fixed.MAP_PIN_HEIGHT + 'px';
+        mapPinMain.style.top = Y_RANGE_MAX - MAP_PIN_HEIGHT + 'px';
         mapPinLocationY = Y_RANGE_MAX;
       }
 

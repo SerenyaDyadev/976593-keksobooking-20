@@ -10,15 +10,17 @@
   var previewPhoto = document.querySelector('.ad-form__photo');
 
   window.clear = function () {
-    var previewPhotoImg = previewPhoto.querySelector('img');
+    var previewPhotoImages = previewPhoto.querySelectorAll('img');
 
     window.utils.closePopupCard();
     window.utils.deletePins();
 
     avatarPhotoDefault.src = avatarPhotoDefaultSrc;
 
-    if (previewPhoto.querySelector('img') !== null) {
-      previewPhotoImg.parentNode.removeChild(previewPhotoImg);
+    if (previewPhotoImages.length > 0) {
+      for (var i = 0; i < previewPhotoImages.length; i++) {
+        previewPhotoImages[i].parentNode.removeChild(previewPhotoImages[i]);
+      }
     }
 
     mapPinMain.style.left = pinCircleDefaultLocalX;

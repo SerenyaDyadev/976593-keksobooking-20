@@ -1,10 +1,15 @@
 'use strict';
+var MAP_PIN_WIDTH = 50;
+var MAP_PIN_HEIGHT = 70;
+
+console.log(document.querySelectorAll('.map__pin'));
+// console.log(document.querySelectorAll('.map__pin')[1].offsetHeight);
 
 var mapPinMain = document.querySelector('.map__pin--main');
-var mapCircleCenterX = +(mapPinMain.style.left).split('px')[0] + window.fixed.MAP_PIN_WIDTH / 2;
-var mapCircleCenterY = +(mapPinMain.style.top).split('px')[0] + window.fixed.MAP_PIN_WIDTH / 2;
+var mapCircleCenterX = +(mapPinMain.style.left).split('px')[0] + MAP_PIN_WIDTH / 2;
+var mapCircleCenterY = +(mapPinMain.style.top).split('px')[0] + MAP_PIN_WIDTH / 2;
 var mapPinLocationX = mapCircleCenterX;
-var mapPinLocationY = +(mapPinMain.style.top).split('px')[0] + window.fixed.MAP_PIN_HEIGHT;
+var mapPinLocationY = +(mapPinMain.style.top).split('px')[0] + MAP_PIN_HEIGHT;
 
 window.utils.disableInputs();
 window.utils.setAddressInputValue(mapCircleCenterX, mapCircleCenterY);
