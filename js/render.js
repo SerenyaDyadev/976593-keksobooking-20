@@ -14,7 +14,7 @@
       if (data[i].offer !== undefined) {
         fragmentMapPin.appendChild(window.pin(data[i]));
       } else {
-        takeNumber +=
+        takeNumber++;
       }
     }
 
