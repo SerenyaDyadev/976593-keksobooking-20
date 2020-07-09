@@ -13,6 +13,8 @@
     for (var i = 0; i < takeNumber; i++) {
       if (data[i].offer !== undefined) {
         fragmentMapPin.appendChild(window.pin(data[i]));
+      } else {
+        takeNumber +=
       }
     }
 
