@@ -18,9 +18,9 @@
     avatarPhotoDefault.src = avatarPhotoDefaultSrc;
 
     if (previewPhotoImages.length > 0) {
-      for (var i = 0; i < previewPhotoImages.length; i++) {
-        previewPhotoImages[i].parentNode.removeChild(previewPhotoImages[i]);
-      }
+      previewPhotoImages.forEach(function (previewPhotoImg) {
+        previewPhotoImg.parentNode.removeChild(previewPhotoImg);
+      });
     }
 
     mapPinMain.style.left = pinCircleDefaultLocalX;
