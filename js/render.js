@@ -2,7 +2,6 @@
 (function () {
   var MAX_PIN_COUNT = 5;
 
-
   window.render = function (data) {
 
     window.utils.closePopupCard();
@@ -12,7 +11,9 @@
     var fragmentMapPin = document.createDocumentFragment();
     var takeNumber = data.length > MAX_PIN_COUNT ? MAX_PIN_COUNT : data.length;
     for (var i = 0; i < takeNumber; i++) {
-      fragmentMapPin.appendChild(window.pin(data[i]));
+      if (data[i].offer !== undefined) {
+        fragmentMapPin.appendChild(window.pin(data[i]));
+      }
     }
 
     window.map.appendChild(fragmentMapPin);
