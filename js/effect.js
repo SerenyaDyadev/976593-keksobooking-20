@@ -18,6 +18,7 @@
     });
 
     document.addEventListener('keydown', function (evt) {
+
       if (evt.keyCode === ESC_KEYCODE) {
         onMessageClose(evt);
       }

@@ -1,8 +1,10 @@
 'use strict';
+var ENTER_KEYCODE = 13;
+
 var MAP_PIN_WIDTH = 50;
 var MAP_PIN_HEIGHT = 70;
 
-console.log(document.querySelectorAll('.map__pin'));
+// console.log(document.querySelectorAll('.map__pin'));
 // console.log(document.querySelectorAll('.map__pin')[1].offsetHeight);
 
 var mapPinMain = document.querySelector('.map__pin--main');
@@ -55,7 +57,7 @@ mapPinMain.addEventListener('mousedown', function (evt) {
 
 mapPinMain.addEventListener('keydown', function (evt) {
 
-  if (evt.key === 'Enter') {
+  if (evt.keyCode === ENTER_KEYCODE) {
     activeMode();
   }
 });

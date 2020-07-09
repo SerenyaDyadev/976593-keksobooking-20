@@ -1,6 +1,9 @@
 'use strict';
 
 (function () {
+  var ESC_KEYCODE = 27;
+  var ENTER_KEYCODE = 13;
+
   var mapBooking = document.querySelector('.map');
   var filtersContainer = document.querySelector('.map__filters-container');
 
@@ -26,7 +29,7 @@
   };
 
   var onClosePopupEsc = function (evt) {
-    if (evt.key === 'Escape') {
+    if (evt.keyCode === ESC_KEYCODE) {
       closeCard();
     }
   };
@@ -62,7 +65,7 @@
 
   mapBooking.addEventListener('keydown', function (evt) {
 
-    if (evt.key === 'Enter') {
+    if (evt.keyCode === ENTER_KEYCODE) {
       openCard(evt);
     }
   });
