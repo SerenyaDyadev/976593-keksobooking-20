@@ -1,14 +1,13 @@
 'use strict';
 var ENTER_KEYCODE = 13;
 
-var MAP_MAIN_PIN_WIDTH = 65;
-var MAP_MAIN_PIN_HEIGHT = 65;
-
 var mapPinMain = document.querySelector('.map__pin--main');
-var mapCircleCenterX = +(mapPinMain.style.left).split('px')[0] + Math.round(MAP_MAIN_PIN_WIDTH / 2);
-var mapCircleCenterY = +(mapPinMain.style.top).split('px')[0] + Math.round(MAP_MAIN_PIN_WIDTH / 2);
+
+var mapCircleCenterX = +(mapPinMain.style.left).split('px')[0] + Math.round(mapPinMain.offsetWidth / 2);
+var mapCircleCenterY = +(mapPinMain.style.top).split('px')[0] + Math.round(mapPinMain.offsetHeight / 2);
+
 var mapPinLocationX = mapCircleCenterX;
-var mapPinLocationY = +(mapPinMain.style.top).split('px')[0] + MAP_MAIN_PIN_HEIGHT;
+var mapPinLocationY = +(mapPinMain.style.top).split('px')[0] + mapPinMain.offsetHeight;
 
 window.utils.disableInputs();
 window.utils.setAddressInputValue(mapCircleCenterX, mapCircleCenterY);
